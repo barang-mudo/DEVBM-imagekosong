@@ -1,0 +1,34 @@
+--Docker
+    -Docker & Docker Hub Introductions
+    -Docker Images - class
+    -Container - Object 
+    -Docker Compose
+    -Docker Compose change names container
+    -Docker Desktop Installations for windows
+--Install PHP, Apache  && Mysql
+--Run PHP & MYSQL Based application in container
+--commit and push Image to Docker Hub
+
+docker build -t php_apache .
+docker run -i --rm -p  80:80 -v D:/RANUR/DOCKER/public_html/:/var/www/html/ --name php_containerGunungmas php_apache
+
+#docker sign to kernel acces
+
+--    docker exec -it <phpcontainerid> bash  
+
+#doceker php restart
+
+--    apachectl restart
+#docker mysql container restart
+
+-- docker restart <containerid>
+
+#aktifkan remote mysql ke sqlyoq dengan perintah berikut di dalam mysql containernya]
+--  mysql -u root -p
+-- > ALTER USER 'root'@'localhost' IDENTIFIED BY '<password>';
+-- > ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
+-- > ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '<password>';
+
+
+
+
