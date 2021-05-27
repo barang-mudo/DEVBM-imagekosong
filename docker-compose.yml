@@ -10,26 +10,15 @@ services:
             - mariadb
         container_name: dasboard
     mariadb:
-        image: docker.io/bitnami/mariadb:10.3
-        environment:
-            - ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_ROOT_PASSWORD=123
-            - MYSQL_USER=user
-            - MYSQL_PASSWORD=user
-            - MYSQL_DATABASE=db_mariaDB
+        image: ranur/mariadb:10.3-mudo
+        volumes:
+            - ./db_sqldata/db_gn.sql:/docker-entrypoint-initdb.d/dump.sql
         ports:
             - 3306:3306
-        volumes:
-            - ./db_sqldata/db_bm.sql:/docker-entrypoint-initdb.d/dump.sql
         container_name: mariaDB
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        links:
-            - mariadb
+        image: ranur/phpmyadmin:1.1-links
         ports:
             - 85:80
-        environment:
-            PMA_HOST: mariadb
-            MYSQL_ROOT_PASSWORD: 12345
         container_name: phpmyadmin
         
