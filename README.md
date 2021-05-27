@@ -1,3 +1,35 @@
+
+# How to RUN this Images
+
+### 1. Pull reqquest WEB Images from my repo with command 
+    docker pull ranur/codeigniter:3.11-sessions
+ 
+### 2. Pull reqquest DATABASE Images from my repo  with command
+
+    docker pull ranur/mariadb:10.3-mudo
+
+### 3. Pull request phpmyadmin Images from my repo with command
+
+    docker pull ranur/phpmyadmin:1.1-links
+
+### 4. After all needed images pulling on your docker you're must clone *YML* files and *dockerfile* from my github repository :
+
+##### YML files and assets from Github
+
+    git clone https://github.com/barang-mudo/DEVBM-imagekosong.git 
+
+### 5. Move into *DEVBM-imagekosong* folder and open Shell/terminal in the locations, type the commadn to run All Images
+
+    PS D:\<dierctory>\DEVBM-imagekosong> *docker-compose up*
+
+### 6. like as my configure of images you can try run on the browser test that url
+
+    * http://localhost:81/              --> view phpinfo / index.php of www folder
+    * http://localhost:81/dashboard     --> example site on my Images
+    * http://localhost:85/              --> phpmyadmin web acces  pages 
+
+___
+___
 Didalam container sudah terdapat konfigurasi PHP dengan lengkap yang dapat anda fungiskan dalam menjalankan PHP-Framework *Codeigniter Versi. 3.11*
 pada container ini saya sudah merapikan semua bug yang saya temui saya temui saat deployment Ci3 diantaranya:
 
@@ -24,23 +56,9 @@ atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masu
     # echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
 
 
-# How to RUN this Images
 
-1. Pull reqquest WEB Images from my repo with command
-    
-    docker pull ranur/codeigniter:3.11-sessions
- 
-2. Pull reqquest DATABASE Images from my repo  with command
 
-    docker pull ranur/mariadb:10.3-mudo
-
-3. Pull request phpmyadmin Images from my repo with command
-
-    docker pull ranur/phpmyadmin:1.1-links
-
-4. After all needed images pulling on your docker you're must clone *YML* files and *dockerfile* from my github repository 
-
-#### dockerfile
+# docker-compose.yml File before i builded All Images
 
     version: "3.7"
     services:
@@ -76,3 +94,19 @@ atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masu
                 PMA_HOST: mariadb
                 MYSQL_ROOT_PASSWORD: 12345
             container_name: phpmyadmin
+
+# Dockerfile before i builded All Images
+
+    FROM bitnami/codeigniter:3.1.11-debian-10-r446
+
+    #install all php lib
+    RUN apt update
+    RUN apt upgrade -y
+    RUN apt install -y apt-utils
+    # Install Git
+    RUN apt-get install -y git
+    #install nano 
+    RUN apt-get install -y nano
+    COPY setup/ /app
+
+    RUN echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
