@@ -1,33 +1,34 @@
 version: "3.7"
 services:
     web: 
-        build: .
+        image: ranur/codeigniter:3.11-sessions
         volumes:
-            - ./site:/var/www/html
+            - ./setup:/app
         ports:
-            - 80:80
+            - 81:8000
         depends_on:
-            - db
-    db:
-        image: mysql
-        volumes:
-            - ./db_data:/var/lib/mysql
+            - mariadb
+        container_name: dasboard
+    mariadb:
+        image: docker.io/bitnami/mariadb:10.3
         environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-            MYSQL_USER: user_root 
-            MYSQL_PASSWORD: 123
-            # MYSQL_ROOT_HOST: '%'
-            MYSQL_ROOT_PASSWORD: 12345
-            MYSQL_DATABASE: db_docker_newUser
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_ROOT_PASSWORD=123
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=user
+            - MYSQL_DATABASE=db_mariaDB
         ports:
             - 3306:3306
-        restart: 'always'
+        volumes:
+            - ./db_sqldata/db_bm.sql:/docker-entrypoint-initdb.d/dump.sql
+        container_name: mariaDB
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         links:
-            - db
+            - mariadb
         ports:
-            - 8080:80
+            - 85:80
         environment:
-            PMA_HOST: db
+            PMA_HOST: mariadb
             MYSQL_ROOT_PASSWORD: 12345
+        container_name: phpmyadmin

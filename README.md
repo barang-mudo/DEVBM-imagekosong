@@ -1,20 +1,38 @@
-# DEVBM-imagekosong
 
-Repository Images Kosong Docker Barang Mudo:
 
-## Doker Compose Container Service List 
-    1. Container Web
-        ..* php:7.2.26-apache
-        ..* git
-        ..* Composer (*CI4*)
-        ..* mysqli (*php extensions*)
-        ..* 
-    2. Container db
-        ..* mysql port 3306
-    3. PHPmyadmin
+#### Push that image wash create and commit before
 
-### Aktifkan remote mysql ke sqlyoq dengan perintah berikut di dalam mysql containernya
-  mysql -u root -p
-    ALTER USER 'root'@'localhost' IDENTIFIED BY '<password>';
-    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
-    ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '<password>';
+    version: "3.7"
+    services:
+        web: 
+            image: ranur/codeigniter:3.11-sessions
+            volumes:
+                - ./setup:/app
+            ports:
+                - 81:8000
+            depends_on:
+                - mariadb
+            container_name: dasboard
+        mariadb:
+            image: docker.io/bitnami/mariadb:10.3
+            environment:
+                - ALLOW_EMPTY_PASSWORD=yes
+                - MYSQL_ROOT_PASSWORD=123
+                - MYSQL_USER=user
+                - MYSQL_PASSWORD=user
+                - MYSQL_DATABASE=db_mariaDB
+            ports:
+                - 3306:3306
+            volumes:
+                - ./db_sqldata/db_bm.sql:/docker-entrypoint-initdb.d/dump.sql
+            container_name: mariaDB
+        phpmyadmin:
+            image: phpmyadmin/phpmyadmin:latest
+            links:
+                - mariadb
+            ports:
+                - 85:80
+            environment:
+                PMA_HOST: mariadb
+                MYSQL_ROOT_PASSWORD: 12345
+            container_name: phpmyadmin
