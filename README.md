@@ -1,6 +1,32 @@
+Didalam container sudah terdapat konfigurasi PHP dengan lengkap yang dapat anda fungiskan dalam menjalankan PHP-Framework *Codeigniter Versi. 3.11*
+pada container ini saya sudah merapikan semua bug yang saya temui saya temui saat deployment Ci3 diantaranya:
+
+- Masalah saaat menggunakan beberapa library yang dibutuhkan seperti *php_mysqli* 
+   .. pada image ini sudah saya selesaikan 
+- Masalah seperti sessions.save_path eror
+   .. Pada image ini sudah saya lampirkan di dlaam dockerfiles untuk _configure php.ini_ agar secara automation/dynamis mengaktifkan konfigurasi sessions.save_path menuju folder default _/temp_ di kernel container, perintah pada docker files tersebut seperti berikut:
+- Masalah pada saat konfigurasi database agar otomatis membawa hasil backupan sqldump dari phpmyadmin /  mysqlYoq engan melampirkan pada sebuah folder lalu tuliskan pada baris Service YML file *mariaDB* dengan fungsi:   *volumes:*
+
+##### Auto Import SQL Dump files (.sql)
+
+    volumes:
+        - ./db_sqldata/db_bm.sql:/docker-entrypoint-initdb.d/dump.sql
 
 
-#### Push that image wash create and commit before
+
+##### Sessions path configures di dalam dockerfile
+    RUN echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
+
+atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masuk melalui perintah *docker exec -it <idcontainer> bash* lalu tulis perintah seperti berikut:
+
+##### Perintah pada terminal 
+
+    # echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
+
+
+
+
+#### dockerfile
 
     version: "3.7"
     services:
