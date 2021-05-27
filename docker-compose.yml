@@ -32,3 +32,4 @@ services:
             PMA_HOST: mariadb
             MYSQL_ROOT_PASSWORD: 12345
         container_name: phpmyadmin
+        
