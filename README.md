@@ -24,7 +24,21 @@ atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masu
     # echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
 
 
+# How to RUN this Images
 
+1. Pull reqquest WEB Images from my repo with command
+    
+    docker pull ranur/codeigniter:3.11-sessions
+ 
+2. Pull reqquest DATABASE Images from my repo  with command
+
+    docker pull ranur/mariadb:10.3-mudo
+
+3. Pull request phpmyadmin Images from my repo with command
+
+    docker pull ranur/phpmyadmin:1.1-links
+
+4. After all needed images pulling on your docker you're must clone *YML* files and *dockerfile* from my github repository 
 
 #### dockerfile
 
