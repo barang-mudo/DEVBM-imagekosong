@@ -24,9 +24,7 @@
 
 ### 6. like as my configure of images you can try run on the browser test that url
 
-    * http://localhost:81/              --> view phpinfo / index.php of www folder
-    * http://localhost:81/dashboard     --> example site on my Images
-    * http://localhost:85/              --> phpmyadmin web acces  pages 
+    * http://localhost:81/              --> index.php of www folder
 
 ___
 ___
@@ -110,3 +108,8 @@ atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masu
     COPY setup/ /app
 
     RUN echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
+
+
+#codeigniter
+#sesssions.save_path
+#php sessions tmp folder on docker 
