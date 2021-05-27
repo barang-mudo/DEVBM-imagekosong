@@ -109,7 +109,7 @@ atau kamu dapatkan menuliskannya pada terminal kernel container dengan cara masu
 
     RUN echo "session.save_path=\"/tmp\"" >> /opt/bitnami/php/lib/php.ini
 
-
-#codeigniter
-#sesssions.save_path
-#php sessions tmp folder on docker 
+### tag
+codeigniter 
+sesssions.save_path
+php sessions tmp folder on docker 
