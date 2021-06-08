@@ -33,7 +33,7 @@ pada container ini saya sudah merapikan semua bug yang saya temui saya temui saa
 
 - Masalah saaat menggunakan beberapa library yang dibutuhkan seperti *php_mysqli* 
    .. pada image ini sudah saya selesaikan 
-- Masalah seperti sessions.save_path eror
+- Masalah seperti sessions.save_path error
    .. Pada image ini sudah saya lampirkan di dlaam dockerfiles untuk _configure php.ini_ agar secara automation/dynamis mengaktifkan konfigurasi sessions.save_path menuju folder default _/temp_ di kernel container, perintah pada docker files tersebut seperti berikut:
 - Masalah pada saat konfigurasi database agar otomatis membawa hasil backupan sqldump dari phpmyadmin /  mysqlYoq engan melampirkan pada sebuah folder lalu tuliskan pada baris Service YML file *mariaDB* dengan fungsi:   *volumes:*
 
